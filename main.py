@@ -3,6 +3,7 @@ import numpy as np
 import random
 
 
+
 circle1_pos_x = 50
 circle1_pos_y = 50
 delay = 0
@@ -11,17 +12,32 @@ y_drag = 0
 override = False
 key = cv.waitKey(1)
 
-while(True):
-    img = np.zeros((500, 500, 3), np.uint8)
+def get_pointer_coords(event,x,y,flags,param):
+    global mouseX,mouseY
+    if event == cv.EVENT_LBUTTONDOWN:
+        mouseX,mouseY = x,y
+        print(mouseX, mouseY)
+        global delay
+        global circle1_pos_x
+        global circle1_pos_y
+        global x_drag
+        global y_drag
 
-    if key == ord('r'):
         delay = random.randint(50, 100)
-        circle1_pos_x = random.randint(10, 490)
-        circle1_pos_y = random.randint(10, 490)
+        circle1_pos_x = mouseX
+        circle1_pos_y = mouseY
 
         x_drag = random.randint(1, 10)
         y_drag = random.randint(1, 10)
+
+
+while(True):
+    img = np.zeros((500, 500, 3), np.uint8)
+
     
+
+    cv.setMouseCallback('RGB', get_pointer_coords)
+
     cv.circle(img, (circle1_pos_x, circle1_pos_y), 10, (0, 150, 255), -1)
 
     
@@ -38,7 +54,7 @@ while(True):
         override = True
 
 
-
+    
     cv.imshow('RGB', img)
 
     key = cv.waitKey(1)
