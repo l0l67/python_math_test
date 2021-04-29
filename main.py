@@ -9,18 +9,14 @@ circle1_pos_y = 250
 mouseX = 250
 mouseY = 250
 delay = 0
-x_drag = 0
-y_drag = 0
 override = False
 key = cv.waitKey(1)
 
 def get_pointer_coords(event,x,y,flags,param):
-    global mouseX,mouseY,delay,circle1_pos_x,circle1_pos_y,x_drag,y_drag
+    global mouseX,mouseY,delay,circle1_pos_x,circle1_pos_y
 
     if event == cv.EVENT_LBUTTONDOWN:
         mouseX,mouseY = x,y
-        x_drag = random.randint(1, 10)
-        y_drag = random.randint(1, 10)
         circle1_pos_x = 250
         circle1_pos_y = 250
         delay = 10
